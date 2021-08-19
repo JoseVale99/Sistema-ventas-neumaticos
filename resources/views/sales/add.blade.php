@@ -123,9 +123,9 @@
                                     <div class="col-md-2 mt-4">
                                         <div class="form-group">
                                             <label class="text-black h4">Descuento</label>
-                                            <input type="number" name="descuento" value="10"
+                                            <input type="number" name="descuento" value="0"
                                             {{-- value="{{ old('descuento') }}" --}}
-                                               min="1" max="40" placeholder="descuento"
+                                               min="0" max="40" placeholder="descuento"
                                                 class="form-control text-upper">
                                             {{-- validaciones --}}
                                             @error('descuento')
@@ -152,9 +152,9 @@
                                         {{-- PARTE BOTONES --}}
                                         
                                         <div class="row justify-content-center mt-4">
-                                            <div class="col-auto">
-                                                <button title="guardar datos" type="submit" class="btn btn-primary btn-ms">
-                                                    agregar <i class="fas fa-add"></i></button>
+                                            <div class="col-md-6">
+                                                <button title="guardar datos" type="submit" class="btn btn-primary btn-lg btn-block">
+                                                    agregar <i class="fas fa-plus-circle"></i></button>
                                             </div>
                                             
                                           
@@ -207,11 +207,11 @@
                                                
                                                 <td class="text-center">{{ $item->id }}</td>
                                                 <td class="text-center">{{ $item->name }}</td>
-                                                <td class="text-center">$ {{ $item->price }}</td>
+                                                <td class="text-center">$ {{ number_format($item->price, 2, '.', '') }}</td>
                                                 <td class="text-center">{{ $item->quantity}}</td>
                                                 <td class="text-center">{{ $item->attributes->descuento}} %</td>
-                                                <td class="text-center">{{  Cart::getTotal() }}.00 MXN</td>
-
+                                                <td class="text-center">$ {{  number_format(Cart::get($item->id)->getPriceSum(),2, '.', '')}}</td>
+                                                
                                                 <td class="text-center">
                                                     <form action="{{ route('venta.removeitem')}}"
                                                     method="POST">
@@ -230,51 +230,70 @@
 
                                                 $i++;
                                                 ?>
-                                               @endforeach
+                                              
                                                
                                                
                                                <td></td>
-                                               {{-- <td class="text-right"> TOTAL: {{ Cart::getTotal() }}  MXN</td>
-                                                <td class="text-right">SUBTOTAL:  {{ Cart::getSubTotal()}} MXN</td> --}}
-                                                <tr>
-                                                    <form action="{{ route('venta.clear') }}" method="POST">
-                                                        @csrf
-                                                        <td class="text-center">
-                                                          <input title="limpiar todo el carrito" class="btn btn-outline-danger btn-lg btn-block" type="submit" name="Limpiar" value="Limpiar Carrito">
-                                                  </form>
-                                                    <td colspan="5" class="text-right">
-                                                      <h6>TOTAL</h6>
-                                                  </td>   
-                                                    <td  class="text-right">
-                                                      {{Cart::getTotal()}}.00 MXN
-                                                  </td>
-                                              
-                                              </tr>
-                                              <tr>
-                                          
-                                                <td colspan="6" class="text-right">
-                                                  <h6>TOTAL IMPUESTO (18%): </h6>                                               </h5>
-                                              </td>   
-                                                <td  class="text-right">
-                                                  <?php $impuesto = Session::get('iva'); ?> 
-                                                  {{$impuesto}}.00
-                                              </td>
-                                          
-                                          </tr>
 
-                                               
-                            
-                                               
+                                                
+                                   
+                                               @endforeach   
+                                    <tr>
+                                        <form action="{{ route('venta.clear') }}" method="POST">
+                                            @csrf
+                                            <td class="text-center">
+                                              <input title="limpiar todo el carrito" 
+                                              class="btn btn-outline-danger btn-lg btn-block" type="submit" name="Limpiar" value="limpiar Carrito">
+                                      </form>
+                                      
+                                        <td colspan="5" class="text-right">
+                                          <h6>TOTAL</h6>
+                                      </td>   
+                                        <td  class="text-right">
+                                         
+                                            {{ number_format(Cart::getTotal(), 2, '.', '') }} MXN
+                                           
+                                      </td>
+                                  
+                                  </tr>
+                                  <tr>
+                              
+                                    <td colspan="6" class="text-right">
+                                      <h6>TOTAL IMPUESTO (18%): </h6>                                               </h5>
+                                  </td>   
+                                    <td  class="text-right">
+                                        {{ number_format($item->attributes->iva, 2, '.', '') }} 
+                                            
+                                        
+                                  </td>
+                              
+                              </tr>
+                              <tr>
+                              25.1814
+                                <td colspan="6" class="text-right">
+                                  <h6>TOTAL A PAGAR: </h6>                                               </h5>
+                              </td>   
+                                <td  class="text-right">
+                                   {{$item->attributes->total_pay}}
+                                        
+                                    
+                              </td>
+                          
+                          </tr>   
+                                
                                             </tbody>
                                             
                                         </table>
                                         @if (count(Cart::getContent())!=0)
                                        
-
-                                            <a title="realizar compra" href="{{ route('cart.stripe')}}"class="btn btn-outline-info btn-lg btn-block ">
+                                        <form action="{{ route('venta.payCart')}}" method="POST">
+                                            @csrf
+                                            <button title="realizar compra" class="btn btn-outline-info btn-lg btn-block ">
                                                  Realizar compra <i class="fas fa-cart-arrow-down"></i>
-                                            </a>
-                                        @endif
+                                            </button>
+                                        </form>
+                                         @endif
+                                       
    
                                     </div>
                             </div>

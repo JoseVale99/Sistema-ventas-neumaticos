@@ -44,7 +44,7 @@
                                         <div class="col-md-3 mt-4">
                                             <div class="form-group">
                                                 <a title="agregar nuevo cliente" type="button" class="btn btn-outline-primary btn-auto mx-3 text-black2"
-                                                    href="{{ route('venta.crate') }}"> 
+                                                    href="{{ route('venta.create') }}"> 
                                                      nueva venta <i class="fas fa-cart-arrow-down"></i>
                                                 </a>
                                             </div>
@@ -129,7 +129,7 @@
 
                                                     <td class="text-center">{{ $venta->articulo }}</td>
                                                     <td class="text-center">{{ $venta->fecha }}</td>
-                                                    <td class="text-center">{{ $venta->descuento }}</td>
+                                                    <td class="text-center">{{ $venta->descuento }} %</td>
                                                     <td class="text-center"> {{ $venta->total_venta }}</td>
                                                            
 

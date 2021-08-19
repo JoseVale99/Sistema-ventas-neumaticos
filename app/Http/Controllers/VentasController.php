@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Session;
 use Cart;
+use DB;
 use SebastianBergmann\LinesOfCode\Counter;
 
 class VentasController extends Controller
@@ -22,9 +23,11 @@ class VentasController extends Controller
         return view('sales.index', compact('sales'));
     }
 
-    public function create(){
+    public function create(Request $request){
         // ver clientes
         
+        
+
         $nombres = Cliente::query()
         ->select(['nombre','apellido_p','apellido_m'])
         ->get();
@@ -38,7 +41,6 @@ class VentasController extends Controller
             $data_names = "";
         }
         
-            
         return view('sales.add', compact('data'));
     }
     public function add(Request $request){
@@ -56,26 +58,42 @@ class VentasController extends Controller
             ]
         );
         
-        $data = 
+        
         Cart::add(array(
-            'id' => '122',
+            'id' => $request->input('cantidad'),
             'name' => $request->input('articulo'), // inique row ID
-            'price' =>  $request->input('pecio_venta'),
+            'price' =>  number_format($request->input('pecio_venta'),2,'.', ''),
             'quantity' =>  $request->input('cantidad'),
             'attributes' => array(
-                'descuento' => $request->input('descuento')
+                'descuento' => $request->input('descuento'),
+                'impuesto' => '',
+                'iva' => '',
+                'total_pay' =>''
+                
             )
         )
         );
 
-        $iva =Cart::getSubTotal() * ($request->get('impuesto')/100); 
-        $impuesto = Cart::getSubTotal()+$iva;
-        // dd($impuesto);
-
         
+
+        $iva =Cart::getSubTotal() * 
+        ($request->get('impuesto')/100);  
+        $impuesto = Cart::getSubTotal()+$iva;
+        
+        $total_pay = round($impuesto-$impuesto * (($request->get('descuento')/100)),2);
+        Cart::update($request->input('cantidad'), array(
+            'attributes' => array(
+                'descuento' => $request->input('descuento'),
+                'impuesto' => $impuesto,
+                'iva' => $iva,
+                'total_pay' =>$total_pay,
+                'cliente' => $request->input('nombre'),
+        )));
+        
+
         Session::flash('message_save', "¡Producto agregado con éxito!");
 
-        return redirect()->route('venta.crate')->with( ['iva' => $iva] );
+        return redirect()->route('venta.create');
     }
     public function removeitem(Request $request)
     {
@@ -96,7 +114,40 @@ class VentasController extends Controller
 
         return back();
     }
-    public function statusCart(){
+    public function payCart(Request $request){
+       
+        // comprobar cliente
+        $data = Cliente::query()    
+            ->select("id",
+            DB::raw("CONCAT(nombre, ' ',apellido_p, ' ', apellido_m) as nombre_completo")
+            
+        )   
+        ->get();
+       
+      
+        foreach (Cart::getContent() as $item) {
+            
+            $venta = new Venta();
+            foreach ($data as $key => $cliente) {
+                if($cliente->nombre_completo ==$item->attributes->cliente ){
+                    $venta->id_cliente=$cliente->id;
+                } 
+                }
+      
+           $venta->nombre = $item->attributes->cliente;
+           $venta->articulo = $item->name;
+           $venta->cantidad = $item->quantity;
+           $venta->impuesto = $item->attributes->iva;
+           $venta->descuento = $item->attributes->descuento; 
+           $venta->total_venta = $item->attributes->total_pay; 
+           
+               
+        }
+        $venta->saveOrFail();
+        Cart::clear();
+        Session::flash('message_save', "¡La compra se realizo con éxito!");
+        
+        return redirect()->route('venta.index');
 
     }
 }

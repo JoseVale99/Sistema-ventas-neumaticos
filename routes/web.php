@@ -67,10 +67,11 @@ Route::resource('clientes', ClienteController::class);
 // Crud de ventas
 
 Route::get('/ventas/index', [VentasController::class,'index'])->name('venta.index');
-Route::get('/ventas/index/create', [VentasController::class,'create'])->name('venta.crate');
+Route::get('/ventas/index/create', [VentasController::class,'create'])->name('venta.create');
 Route::post('/ventas/nuevaventa', [VentasController::class,'add'])->name('venta.add');
 Route::post('/Ventas/eliminaritems', [VentasController::class,'removeitem'])->name('venta.removeitem');
 Route::post('/Ventas/eliminaritem', [VentasController::class,'clear'])->name('venta.clear');
+Route::post('/Ventas/pago-tiket', [VentasController::class, 'payCart'])->name('venta.payCart');
 
 
 
