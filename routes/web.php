@@ -9,6 +9,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\VentasController;
+use App\Models\Venta;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -61,9 +64,13 @@ Route::get('/Cart/Carrito', [CarritoController::class,'index'])->name('cart.cart
 // Clientes CRUD--- -----
 
 Route::resource('clientes', ClienteController::class);
+// Crud de ventas
 
-
-
+Route::get('/ventas/index', [VentasController::class,'index'])->name('venta.index');
+Route::get('/ventas/index/create', [VentasController::class,'create'])->name('venta.crate');
+Route::post('/ventas/nuevaventa', [VentasController::class,'add'])->name('venta.add');
+Route::post('/Ventas/eliminaritems', [VentasController::class,'removeitem'])->name('venta.removeitem');
+Route::post('/Ventas/eliminaritem', [VentasController::class,'clear'])->name('venta.clear');
 
 
 

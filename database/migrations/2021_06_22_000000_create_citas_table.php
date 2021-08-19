@@ -115,6 +115,27 @@ class CreateCitasTable extends Migration
                
         });
 
+         //  ventas 
+         Schema::create('ventas', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('id_cliente')->nullable();
+            $table->string('nombre')->nullable(false); 
+            $table->text('articulo');
+            $table->integer('cantidad');
+            $table->integer('impuesto')->default(18);
+            $table->timestamp('fecha');
+            $table->integer('descuento');
+            $table->integer('total_venta');
+           
+
+            $table->foreign('id_cliente')
+            ->references('id')->on('clientes') 
+            ->onDelete('cascade');
+
+            $table->softDeletes(); 
+
+               
+        });
         //// citas
         // Schema::create('citas', function (Blueprint $table) {
         //     $table->increments('id');

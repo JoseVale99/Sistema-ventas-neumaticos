@@ -43,6 +43,17 @@
              </li>
              @endcan
 
+             {{-- @can('client.index') --}}
+             <hr class="sidebar-divider my-0">
+
+             <li class="nav-item   {{ !Route::is('venta.index') ?: 'active' }}">
+                 <a class="nav-link" href="{{ route('venta.index') }}">
+                    <i class="fas fa-fw fa-cart-arrow-down"></i>
+                     <span>ventas</span>
+                 </a>
+             </li>
+             {{-- @endcan --}}
+
             {{-- @can('productos.index')
             <hr class="sidebar-divider my-0">
                 <li class="nav-item  {{ request()->routeIs('productos.index') ? 'active' : '' }}">

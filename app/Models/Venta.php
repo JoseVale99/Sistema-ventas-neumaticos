@@ -4,11 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class Cliente extends Model
+
+class Venta extends Model
 {
-   
     use SoftDeletes; //Implementamos
-    protected $table = 'clientes';
+    protected $table = 'ventas';
     protected $dates = ['deleted_at']; //Registramos la nueva columna
     protected $primarykey = 'id';
     public $timestamps = false;
@@ -16,11 +16,11 @@ class Cliente extends Model
     
     protected $fillable = [
         'nombre',
-        'apellido_p',
-        'apellido_m',
-        'direccion',
-        'correo',
-        'telefono'
+        'articulo',
+        'cantidad',
+        'impuesto',
+        'descuento',
+        'total_venta'
     ];
 
      // función para la búsqueda de productos
@@ -29,8 +29,8 @@ class Cliente extends Model
     		return $query->where($tipo,'like',"%$buscar%");
     	}
     }
-
-    public function getVentas(){
-        return $this->hasMany('App\Models\Venta');
-    }
+    // Relacion uno a muchos (inversa)
+public function cliente(){
+    return $this->belongTO('App\Models\Cliente');
+ }
 }

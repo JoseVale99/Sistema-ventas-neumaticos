@@ -7,7 +7,6 @@ use Cart;
 use Illuminate\Http\Request;
 use Session;
 use App\Models\Pedido;
-use App\Models\User;
 use Stripe\Stripe;
 use Stripe\Charge;
 use Carbon\Carbon;
