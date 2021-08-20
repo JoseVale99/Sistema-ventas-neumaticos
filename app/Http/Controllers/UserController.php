@@ -112,9 +112,9 @@ class UserController extends Controller
                 ]
             );
 
-      
+
             $name_photo= $request->id;
-      
+
             $uploadedFileUrl = $request->file('photo')->storeOnCloudinaryAs('perfil',$name_photo);
 
              $user-> photo =$uploadedFileUrl->getPath();
