@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\PromocionesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +25,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('promociones', [PromocionesController::class,'index','mensaje']);
 
 Route::group(['middleware' =>'auth'], function(){
 
