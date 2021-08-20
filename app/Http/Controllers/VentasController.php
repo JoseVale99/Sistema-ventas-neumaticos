@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Session;
 use Cart;
 use DB;
+use PDF;
 use SebastianBergmann\LinesOfCode\Counter;
 
 class VentasController extends Controller
@@ -167,17 +168,17 @@ class VentasController extends Controller
     }
     public function ticket_download($id){
 
-        $venta = Venta::findOrFail($id);
-        // foreach (Cart::getContent() as $item) {
-
-        // }
+        $ventas = DB::table('ventas')->where('id', '=',$id)
+        ->where('id', "=",$id)   
+        ->get();
+       
         // share data to view
-        view()->share('sales.ticketPDF', $venta);
-        $pdf = PDF::loadView('Cart.invoices-pdf', ['ventas' => $venta]);
-    
-
+         view()->share('sales.ticketPDF', $ventas);
+        $pdf = PDF::loadView('sales.ticketPDF',compact('ventas'))
+        ->setPaper('a4', 'landscape')->setWarnings(false);
+        // $pdf- render();
 
     // download PDF file with download method
-    return $pdf->download('ticket.pdf');
+    return $pdf->stream("ticket.pdf",array('Attachment'=>false));
     }
 }

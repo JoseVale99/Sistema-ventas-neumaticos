@@ -109,7 +109,7 @@
                                                 <th scope="col">FECHA</th>
                                                 <th scope="col">DESCUENTO</th>
                                                 <th scope="col">TOTAL</th>
-                                                <th scope="col" colspan="2">ACCIONES</th>
+                                                <th scope="col" colspan="3">ACCIONES</th>
                                             </tr>
                                         </thead>
                                         <tbody class="text-black2">
@@ -153,6 +153,20 @@
                                                         </form> 
                                                         {{-- @endcan --}}
                                                     </td>
+
+
+                                                    <td>
+                                                        {{-- @can('productos.destroy') --}}
+                                                        
+                                                            <a href="{{ route('venta.ticket', [$venta->id])}}" target="_blank"
+                                                            class="btn btn-outline-success btn-circle btn-download">
+                                                               
+                                                                <i class="fa fa-download"></i>
+                                                            </a>
+                                                      
+                                                        {{-- @endcan --}}
+                                                    </td>
+
                                                 </tr>
                                             @empty
                                             <h3 class="text-black text-center"> ¡No hay registros!</h3>

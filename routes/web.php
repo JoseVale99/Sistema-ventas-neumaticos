@@ -74,7 +74,7 @@ Route::post('/Ventas/eliminaritem', [VentasController::class,'clear'])->name('ve
 Route::post('/Ventas/pago-tiket', [VentasController::class, 'payCart'])->name('venta.payCart');
 Route::get('/Ventas/detalleventa/{id}', [VentasController::class, 'detalle_venta'])->name('venta.detalle_venta');
 Route::delete('/Ventas/remove/{id}', [VentasController::class, 'delete'])->name('venta.delete');
-Route::post('/Ventas/download/ticket/{id}', [VentasController::class, 'ticket_download'])->name('venta.ticket');
+Route::get('/Ventas/download/ticket/{id}', [VentasController::class, 'ticket_download'])->name('venta.ticket');
 
 
 
