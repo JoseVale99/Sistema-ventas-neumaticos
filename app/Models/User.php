@@ -8,9 +8,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use App\Notifications\MyResetPassword;
+use Laravel\Sanctum\HasApiTokens;
+
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasApiTokens;
     use HasRoles;
     /**
      * The attributes that are mass assignable.
@@ -56,17 +58,17 @@ class User extends Authenticatable
     //     return $this->hasMany('App\Article');
     // }
 
-         // función para la búsqueda de usuarios
-         public function scopeBuscar($query, $tipo, $buscar) {
-            if ( ($tipo) && ($buscar) ) {
-                return $query->where($tipo,'like',"%$buscar%");
-            }
-          
+    // función para la búsqueda de usuarios
+    public function scopeBuscar($query, $tipo, $buscar) {
+        if ( ($tipo) && ($buscar) ) {
+            return $query->where($tipo,'like',"%$buscar%");
         }
-        public function sendPasswordResetNotification($token)
-        {
-            $this->notify(new MyResetPassword($token));
-        }  
-        
+
+    }
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new MyResetPassword($token));
+    }
+
 
 }
