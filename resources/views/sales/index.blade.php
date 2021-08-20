@@ -130,7 +130,7 @@
                                                     <td class="text-center">{{ $venta->articulo }}</td>
                                                     <td class="text-center">{{ $venta->fecha }}</td>
                                                     <td class="text-center">{{ $venta->descuento }} %</td>
-                                                    <td class="text-center"> {{ $venta->total_venta }}</td>
+                                                    <td class="text-center"> $ {{ $venta->total_venta }}</td>
                                                            
 
                                                     
@@ -143,14 +143,14 @@
                                                     </td>
                                                     <td>
                                                         {{-- @can('productos.destroy') --}}
-                                                        {{-- <form action="{{ route('clientes.destroy', [$cliente]) }}"
+                                                        <form action="{{ route('venta.delete', [$venta->id]) }}" 
                                                             method="post">
                                                             @method("delete")
                                                             @csrf
                                                             <button title="borrar producto" type="submit" class="btn btn-outline-danger btn-circle btn-delete">
                                                                 <i class="fa fa-trash"></i>
                                                             </button>
-                                                        </form>  --}}
+                                                        </form> 
                                                         {{-- @endcan --}}
                                                     </td>
                                                 </tr>

@@ -158,4 +158,26 @@ class VentasController extends Controller
         return view('sales.detalle_sales',compact('ventas'));
     }
 
+    public function delete($id){
+        Session::flash('message_delete', '¡Producto cancelado con éxito!');
+        $venta = Venta::findOrFail($id);
+        $venta->delete();
+
+        return redirect()->route("venta.index");
+    }
+    public function ticket_download($id){
+
+        $venta = Venta::findOrFail($id);
+        // foreach (Cart::getContent() as $item) {
+
+        // }
+        // share data to view
+        view()->share('sales.ticketPDF', $venta);
+        $pdf = PDF::loadView('Cart.invoices-pdf', ['ventas' => $venta]);
+    
+
+
+    // download PDF file with download method
+    return $pdf->download('ticket.pdf');
+    }
 }
