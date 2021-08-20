@@ -9,7 +9,6 @@ use Session;
 use Cart;
 use DB;
 use PDF;
-use SebastianBergmann\LinesOfCode\Counter;
 
 class VentasController extends Controller
 {
