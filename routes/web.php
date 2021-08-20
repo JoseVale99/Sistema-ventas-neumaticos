@@ -72,6 +72,7 @@ Route::post('/ventas/nuevaventa', [VentasController::class,'add'])->name('venta.
 Route::post('/Ventas/eliminaritems', [VentasController::class,'removeitem'])->name('venta.removeitem');
 Route::post('/Ventas/eliminaritem', [VentasController::class,'clear'])->name('venta.clear');
 Route::post('/Ventas/pago-tiket', [VentasController::class, 'payCart'])->name('venta.payCart');
+Route::get('/Ventas/detalleventa/{id}', [VentasController::class, 'detalle_venta'])->name('venta.detalle_venta');
 
 
 

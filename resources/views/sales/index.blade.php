@@ -136,9 +136,9 @@
                                                     
                                                     <td>
                                                         {{-- @can('client.edit') --}}
-                                                        {{-- <a title="editar datos" href="{{ route('clientes.edit',$cliente) }}"
+                                                        <a title="detalle venta" href="{{ route('venta.detalle_venta',$venta->id) }}"
                                                             class="btn btn-outline-primary btn-circle">
-                                                            <i class="fa fa-edit"></i></a> --}}
+                                                            <i class="fa fa-info-circle"></i></a>
                                                         {{-- @endcan --}}
                                                     </td>
                                                     <td>

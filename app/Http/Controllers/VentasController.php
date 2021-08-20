@@ -150,4 +150,12 @@ class VentasController extends Controller
         return redirect()->route('venta.index');
 
     }
+    public function detalle_venta($id){
+
+        $ventas = Venta::findOrFail($id);
+        // dd($ventas);
+
+        return view('sales.detalle_sales',compact('ventas'));
+    }
+
 }
