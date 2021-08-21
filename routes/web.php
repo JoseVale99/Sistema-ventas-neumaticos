@@ -10,6 +10,7 @@ use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\VentasController;
+use App\Http\Controllers\PromocionesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,7 +76,10 @@ Route::get('/Ventas/detalleventa/{id}', [VentasController::class, 'detalle_venta
 Route::delete('/Ventas/remove/{id}', [VentasController::class, 'delete'])->name('venta.delete');
 Route::get('/Ventas/download/ticket/{id}', [VentasController::class, 'ticket_download'])->name('venta.ticket');
 
-
+// PROMOCIONES -API TELEGRAM
+Route::get('/Promociones/index', [PromocionesController::class,'index'])->name('promocion.index');
+Route::post('/Promociones/send_promotion', [PromocionesController::class,'toTelegram'])->name('promocion.send');
+// Route::get('/updated-activity', [PromocionesController::class,'updatedActivity']);
 
 // pagos con stripe
 

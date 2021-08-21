@@ -54,6 +54,20 @@
              </li>
              {{-- @endcan --}}
 
+              {{-- @can('client.index') --}}
+              <hr class="sidebar-divider my-0">
+
+              <li class="nav-item   {{ !Route::is('promocion.index') ?: 'active' }}">
+                  <a class="nav-link" href="{{ route('promocion.index') }}">
+                     <i class="fas fa-fw fa-percentage"></i>
+                      <span>Promociones</span>
+                  </a>
+              </li>
+              {{-- @endcan --}}
+
+
+
+
             {{-- @can('productos.index')
             <hr class="sidebar-divider my-0">
                 <li class="nav-item  {{ request()->routeIs('productos.index') ? 'active' : '' }}">
