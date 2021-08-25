@@ -100,7 +100,7 @@ class CreateCitasTable extends Migration
 
         //  clientes 
         Schema::create('clientes', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('nombre')->nullable(false); 
             $table->text('apellido_p');
             $table->text('apellido_m');
