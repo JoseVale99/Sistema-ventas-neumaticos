@@ -77,7 +77,7 @@
                             alt="desarrollo" width="180" height="160">
 
                         <div>
-                            <h3 class="fs-5 mt-4 px-4 pb-1 text-success">Promociones/h3>
+                            <h3 class="fs-5 mt-4 px-4 pb-1 text-success">Promociones</h3>
                             <p class="px-4">Las mejores promociones las encuentras aquí.</p>
                         </div>
                     </div>

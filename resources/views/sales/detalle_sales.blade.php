@@ -17,7 +17,7 @@
                     @csrf
                     <br>
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 bold-title"> VER DATOS CLIENTE <i class="fas fa-eye"></i> </h1>
+                    <h1 class="h3 mb-2 bold-title"> DETALLE VENTA <i class="fas fa-sales"></i> </h1>
                     <p class="mb-4 text-dark">Actualice los datos de los clientes aquí.</p>
 
 
