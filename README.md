@@ -32,7 +32,7 @@ DB_PASSWORD=YOUR PASSWORD
    - php artisan migrate --seed -> Migrar las tablas  y seeders.
    - php artisan migrate:fresh -> Sí ya antes se migraron las tablas ejecutar este comando para realizar los cambios realizados.
    - php artisan migrate:fresh  --seed ->  Sí ya antes se migraron las tablas ejecutar este comando para realizar los cambios y enviar los seeders.
-    php artisan storage:link  -> Una vez que se ha almacenado un archivo y se ha creado el enlace simbólico, puede crear una URL a los archivos utilizando el asistente de activos.
+   - php artisan storage:link  -> Una vez que se ha almacenado un archivo y se ha creado el enlace simbólico, puede crear una URL a los archivos utilizando el asistente de activos.
 ```
 
 
