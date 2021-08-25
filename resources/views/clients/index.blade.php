@@ -106,7 +106,7 @@
                                                 <th scope="col">NOMBRE</th>
                                                 <th scope="col">APELLIDO PATERNO</th>
                                                 <th scope="col">APELLIDO MATERNO</th>
-                                                <th scope="col">FECHA</th>
+                                                {{-- <th scope="col">FECHA</th> --}}
                                                 <th scope="col">DIRECCION</th>
                                                 <th scope="col">E-MAIL</th>
                                                 <th scope="col">TELEFONO</th>
@@ -130,7 +130,7 @@
 
                                                     <td class="text-center">{{ $cliente->apellido_p }}</td>
                                                     <td class="text-center">{{ $cliente->apellido_m }}</td>
-                                                    <td class="text-center">{{ $cliente->fecha }}</td>
+                                                    {{-- <td class="text-center">{{ $cliente->fecha }}</td> --}}
                                                     <td class="text-center"> {{ $cliente->direccion }}</td>
                                                     <td class="text-center"> {{ $cliente->correo}}</td>
                                                     <td class="text-center"> {{ $cliente->telefono }}</td>

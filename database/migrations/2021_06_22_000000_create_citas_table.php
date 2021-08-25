@@ -104,7 +104,7 @@ class CreateCitasTable extends Migration
             $table->string('nombre')->nullable(false); 
             $table->text('apellido_p');
             $table->text('apellido_m');
-            $table->timestamp('fecha');
+            // $table->timestamp('fecha');
             $table->text('direccion');
             $table->string('correo');
             $table->String('telefono');
